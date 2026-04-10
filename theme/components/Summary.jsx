@@ -15,8 +15,11 @@
 								<li className="item" key={index}>
 									{
 										item.articles.length ? (
-											<div className="m-summary-block">
-												{item.title ? <a href={relePath(props.releativePath, item.ref)} className="href" >{item.title}</a> : ''}
+											<div className="m-summary-block" data-collapsible="true">
+												<div className="m-summary-header">
+													{item.title ? <a href={relePath(props.releativePath, item.ref)} className="href" >{item.title}</a> : ''}
+													<span className="m-summary-toggle"></span>
+												</div>
 												<ul className={'m-summary-list' + (item.title ? ' indent' : '')}>{getItems(item.articles)}</ul>
 											</div>
 										) : <a href={relePath(props.releativePath, item.ref)} className="href" >{item.title}</a>
@@ -29,8 +32,13 @@
 
 					return props.summary.map((item, index) => {
 						return (
-							<div className="m-summary-block" key={index}>
-								{item.title ? <div className="m-summary-title">{item.title}</div> : ''}
+							<div className="m-summary-block" key={index} data-collapsible={item.title ? "true" : "false"}>
+								{item.title ? (
+									<div className="m-summary-header">
+										<div className="m-summary-title">{item.title}</div>
+										<span className="m-summary-toggle"></span>
+									</div>
+								) : ''}
 								<ul className={'m-summary-list' + (item.title ? ' indent' : '')}>{getItems(item.articles)}</ul>
 							</div>
 						);
